@@ -44,16 +44,19 @@ class CrudRepository{
         
     }
     
-    async  update(data , id) {
-      
+    async updated(data , id){
+
         const response = await this.model.update(data , {
-            where : {
+            where :  {
                 id : id
             }
-        })
-       
-        return response;
-     
+        });
+
+        if(response[0] == 0){
+             throw new AppError("Cannot find out the resource" , StatusCodes.NOT_FOUND);
+        }
+        const updateAirplane = await this.model.findByPk(id);
+        return updateAirplane;
     }
 }
 

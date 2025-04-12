@@ -60,20 +60,20 @@ async function  destroyAirplane(data) {
     }
 }
 
-
 async function  updateAirplane(data , id) {
-    
     try {
-        
-        const airplane = await airplaneRepository.update(data , id);
+        const airplane = await airplaneRepository.updated(data, id);
         return airplane;
     } catch (error) {
-        if(error.name == StatusCodes.NOT_FOUND){
-            throw new AppError('The airplane you requested is not present', error.statusCode);
+        
+        if(error.name == 'SequelizeValidationError'){
+            throw new AppError("The airplane is not present due to their validation", StatusCodes.NOT_FOUND);
         }
+        
         throw new AppError("Cannot update the airplane" , StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
+
 module.exports = {
     createAirplane,
     getAirplane,

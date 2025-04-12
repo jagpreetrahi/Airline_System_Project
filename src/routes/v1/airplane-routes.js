@@ -23,7 +23,7 @@ router.delete('/:id',
     AirplaneController.destroyAirplane)
 
 // api/v1/airplane/:id -> Update
-router.patch('/:id' , AirplaneController.updateAirplane)    
+router.put('/:id' , AirplaneController.updateAirplane)    
 
     
 
