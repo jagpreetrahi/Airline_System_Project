@@ -6,14 +6,14 @@ const {SuccessResponse , ErrorResponse} = require('../utils/common')
 
 async function createAirport(req , res) {
 
-    console.log(req.body)
+    
     try {
         const airport = await AirportService.createAirport({
             name : req.body.name,
             code : req.body.code,
             cityId : req.body.cityId
         })
-        SuccessResponse.data = airport
+        SuccessResponse.data = airport;
         return res.status(StatusCodes.CREATED).json(SuccessResponse)
     } catch (error) {
         ErrorResponse.error = error;
@@ -26,7 +26,6 @@ async function getAirport(req, res){
     try {
         
         const airport = await AirportService.getAirport(req.params.id);
-        
         SuccessResponse.data = airport;
         return res.status(StatusCodes.OK).json(SuccessResponse)
     } catch (error) {
@@ -42,7 +41,6 @@ async function getAirports(req, res){
     try {
         
         const airports = await AirportService.getAirports();
-        
         SuccessResponse.data = airports;
         return res.status(StatusCodes.OK).json(SuccessResponse)
     } catch (error) {
@@ -58,7 +56,6 @@ async function destroyAirport(req, res){
     try {
         
         const airport = await AirportService.destroyAirport(req.params.id);
-        
         SuccessResponse.data = airport;
         return res.status(StatusCodes.OK).json(SuccessResponse)
     } catch (error) {
@@ -72,8 +69,7 @@ async function destroyAirport(req, res){
 async function updateAirport(req, res){ 
    
     const airportData = req.body;
-    console.log(airportData)
-    console.log(req.params.id)
+   
     try {
         
         const airport = await AirportService.updateAirport(airportData , req.params.id);
