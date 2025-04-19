@@ -7,9 +7,21 @@ const validateAirport =  (req, res, next) => {
     const code = req.body.code;
     const cityId = req.body.cityId;
 
-    if(!name && !code && !cityId){
-        ErrorResponse.message = "Something went wrong while creating a airport"
-        ErrorResponse.error = {explanation :  "You are not providing the correct details"}
+    const message = "Something went wrong while creating a airport";
+
+    if(!name){
+        ErrorResponse.message = message;
+        ErrorResponse.error = {explanation :  "Name not found in the information detail"}
+        return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+    }
+    if(!code){
+        ErrorResponse.message = message;
+        ErrorResponse.error = {explanation :  "Code not found in the information detail"}
+        return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
+    }
+    if(!cityId){
+        ErrorResponse.message = message;
+        ErrorResponse.error = {explanation :  "CityId not found in the information detail"}
         return res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
     }
 
