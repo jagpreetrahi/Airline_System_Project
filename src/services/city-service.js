@@ -2,12 +2,12 @@ const {StatusCodes} = require('http-status-codes');
 const {CityRepository} = require('../repositories');
 const AppError = require('../utils/errors/app-error');
 
-const cityrepo = new CityRepository();
+const cityRepo = new CityRepository();
 
 
 async function createCity(data){
     try {
-       const city = await cityrepo.create(data);
+       const city = await cityRepo.create(data);
        return city;
     } catch (error) {
         
@@ -25,12 +25,10 @@ async function createCity(data){
  async function getCity(id){
  
      try {
-          const city = await cityrepo.get(id);
+          const city = await cityRepo.get(id);
          return city;
      } catch (error) {
-         if(error.name == StatusCodes.NOT_FOUND){
-             throw new AppError('The city you requested is not present', error.statusCode);
-         }
+         
          throw new AppError("Cannot found the city" , StatusCodes.INTERNAL_SERVER_ERROR);
      }
  
@@ -38,31 +36,26 @@ async function createCity(data){
  
  async function  getCities() {
      try {
-         const cities = await cityrepo.getAll();
-         
-         return cities;
+        const cities = await cityRepo.getAll();
+        return cities;
      } catch (error) {
          
-         throw new AppError("Cannot found all the cities" , StatusCodes.INTERNAL_SERVER_ERROR)
+        throw new AppError("Cannot found all the cities" , StatusCodes.INTERNAL_SERVER_ERROR)
      }
  }
  
  async function  destroyCity(data) {
      try {
-         const city = await cityrepo.destroy(data);
+         const city = await cityRepo.destroy(data);
          return city;
      } catch (error) {
-        console.log(error.name);
-         if(error.name == StatusCodes.NOT_FOUND){
-             throw new AppError('The city you requested is not present', error.statusCode);
-         }
-         throw new AppError("Cannot delete the city" , StatusCodes.INTERNAL_SERVER_ERROR);
+          throw new AppError("Cannot delete the city" , StatusCodes.INTERNAL_SERVER_ERROR);
      }
  }
  
  async function  updateCity(data , id) {
      try {
-         const airplane = await cityrepo.updated(data, id);
+         const airplane = await cityRepo.updated(data, id);
          return airplane;
      } catch (error) {
          
