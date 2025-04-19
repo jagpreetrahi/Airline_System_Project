@@ -29,9 +29,7 @@ async function getAirport(id){
          const airport = await airportRepository.get(id);
         return airport;
     } catch (error) {
-        if(error.name == StatusCodes.NOT_FOUND){
-            throw new AppError('The airport you requested is not present', error.statusCode);
-        }
+        
         throw new AppError("Cannot found the airport" , StatusCodes.INTERNAL_SERVER_ERROR);
     }
 
@@ -40,7 +38,6 @@ async function getAirport(id){
 async function  getAirports() {
     try {
         const response = await airportRepository.getAll();
-       
         return response;
     } catch (error){
         
@@ -53,19 +50,16 @@ async function  destroyAirport(data) {
         const airport = await airportRepository.destroy(data);
         return airport;
     } catch (error) {
-        if(error.name == StatusCodes.NOT_FOUND){
-            throw new AppError('The airport you requested is not present', error.statusCode);
-        }
+        
         throw new AppError("Cannot delete the airport" , StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
 async function  updateAirport(data , id) {
-    console.log("Data is " , data);
-    console.log("Id is " , id)
+    
     try {
         const airport = await airportRepository.updated(data, id);
-        return airport
+        return airport;
     } catch (error) {
         
         if(error.name == 'SequelizeValidationError'){
