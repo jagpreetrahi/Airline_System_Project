@@ -14,15 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Airplane, {
          foreignKey : 'airplaneId',
-         onDelete : 'CASCADE'
+         
       })
       this.belongsTo(models.airport, {
          foreignKey : 'destinationAirportId',
-         onDelete : 'CASCADE'
+         
       })
       this.belongsTo(models.airport, {
         foreignKey : 'arrivalAirportId',
-        onDelete : 'CASCADE'
+        
      })
     }
   }
@@ -60,15 +60,15 @@ module.exports = (sequelize, DataTypes) => {
     price: {
        type : DataTypes.INTEGER,
        allowNull : false,
-       unique : true
+       
     },
-    totalSeat : {
+    totalSeats : {
        type : DataTypes.INTEGER,
        allowNull : false
     },
     boardingGate: {
        type : DataTypes.STRING,
-       allowNull :false,
+       
        unique : true
     }, 
    
