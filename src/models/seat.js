@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 const {EnumData} = require('../utils/common');
-const {BUSINESS , ECONOMY , PREMIUM_ECONOMY , FIRST_CLASS} = EnumData.Seat_types;
+const {BUSINESS , ECONOMY , PREMIUM_ECONOMY , FIRST_CLASS} = EnumData.Seat_types
 module.exports = (sequelize, DataTypes) => {
   class Seat extends Model {
     /**
@@ -29,9 +29,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull : false
     },
     class_type: {
-      type : DataTypes.ENUM,
+      type : DataTypes.ENUM(BUSINESS, ECONOMY, PREMIUM_ECONOMY , FIRST_CLASS),
       allowNull : false,
-      value : [BUSINESS , ECONOMY , PREMIUM_ECONOMY , FIRST_CLASS],
       defaultValue : ECONOMY
     },
     airplaneId: {
